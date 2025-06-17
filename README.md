@@ -77,7 +77,4 @@ This project is designed for **freshers** or **students** who want to:
 
 ## 📸 Screenshots
 
-> You can add screenshots here using Markdown:
-```markdown
-![Homepage](screenshots/homepage.png)
-![Cart](screenshots/cart.png)
+
