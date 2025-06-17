@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fashion Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #fff;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .product-images {
+      flex: 1 1 500px;
+    }
+
+    .product-images img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      flex: 1 1 400px;
+    }
+
+    .product-info h1 {
+      margin-bottom: 15px;
+      font-size: 36px;
+    }
+
+    .product-info p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color: #666;
+    }
+
+    .price {
+      font-size: 28px;
+      color: #0070f3;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      margin-left: 10px;
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #0070f3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #005bb5;
+    }
+
+    .back-link {
+      display: block;
+      margin: 20px;
+      text-align: center;
+      color: #0070f3;
+      text-decoration: none;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Fashion Store
+  </header>
+
+  <div class="container" id="product-detail">
+    <!-- Product details will be loaded here -->
+  </div>
+
+  <a href="shop.html" class="back-link">← Back to Shop</a>
+
+  <script>
+    const products = [
+      { id: '2', name: "Casual Outfit", price: 39.99, originalPrice: 69.00, image: "product2.jpg", description: "Our fan favourite, this asymmetrical T-shirt silhouette is designed in our soft and functional Tech Jersey fabric. The style elevates the classic tee into an elevated version of your favourite basics." }
+    ];
+    
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id') || '2'; // default to 1
+
+    const product = products.find(p => p.id === productId);
+
+    const productDetailDiv = document.getElementById('product-detail');
+
+    if (product) {
+      productDetailDiv.innerHTML = `
+        <div class="product-images">
+          <img src="${product.image}" alt="${product.name}">
+        </div>
+        <div class="product-info">
+          <h1>${product.name}</h1>
+          <div class="price">
+            $${product.price.toFixed(2)}
+            <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
+          </div>
+          <p>${product.description}</p>
+          <label for="size">Select Size:</label>
+          <select id="size">
+            <option>XXS</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+          </select>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      `;
+    } else {
+      productDetailDiv.innerHTML = `<p>Product not found!</p>`;
+    }
+    
+  </script>
+
+</body>
+</html>

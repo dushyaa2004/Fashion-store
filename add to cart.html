@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #f4f4f9;
+      transition: margin-left 0.5s;
+    }
+
+    h1, h3 {
+      font-family: 'Colonna MT', cursive;
+      color: #333;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #111;
+      color: white;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      margin: 10px 0;
+      transition: 0.3s;
+    }
+
+    #sidebar a:hover {
+      background: #ff6f61;
+      transform: scale(1.1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 36px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Header */
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-btn {
+      font-size: 30px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+
+    .cart-link {
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Cart Items */
+    #cart-items {
+      margin: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .cart-item {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 280px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .cart-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ff6f61;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #d9534f;
+    }
+
+    #pay-button {
+      margin-top: 30px;
+      font-size: 18px;
+      padding: 12px 24px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    #pay-button:hover {
+      background-color: #218838;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      #cart-items {
+        margin: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+
+      .cart-item {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">×</button>
+    <a href="home page.html">🏠 <span>Home</span></a>
+    <a href="shop.html">🛍 <span>Shop</span></a>
+    <a href="add to cart.html">🛒 <span>Cart</span></a>
+    <a href="about.html">ℹ️ <span>About</span></a>
+    <a href="contact.html">📞 <span>Contact</span></a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <button class="menu-btn" onclick="openSidebar()">☰</button>
+    <h1>Shopping Cart</h1>
+    <a href="cart.html" class="cart-link">🛒 Cart <span id="cart-count">0</span></a>
+  </header>
+
+  <!-- Cart Section -->
+  <section id="cart-items"></section>
+  <h3>Total: $<span id="total-price">0.00</span></h3>
+
+  <!-- Payment Button -->
+  <button id="pay-button" onclick="proceedToPayment()">Proceed to Payment</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Update cart count
+      function updateCartCount() {
+        document.getElementById("cart-count").textContent = cart.length;
+      }
+      updateCartCount();
+
+      // Display cart items
+      let cartContainer = document.getElementById("cart-items");
+      let totalPrice = 0;
+
+      cart.forEach((item, index) => {
+        let itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>$${item.price.toFixed(2)}</p>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartContainer.appendChild(itemDiv);
+        totalPrice += item.price;
+      });
+
+      document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+    });
+
+    // Sidebar functions
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+      document.body.style.marginLeft = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+      document.body.style.marginLeft = "0";
+    }
+
+    // Remove item from cart
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.reload();
+    }
+
+    // Proceed to Payment
+    function proceedToPayment() {
+      localStorage.removeItem("cart"); // Clear cart
+      window.location.href = "payment.html"; // Redirect to payment page
+    }
+  </script>
+
+</body>
+</html>

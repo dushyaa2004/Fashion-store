@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      transition: margin-left 0.5s;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #343a40;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      transition: 0.3s;
+      margin: 15px 0;
+    }
+
+    .sidebar a:hover {
+      background-color: #28a745;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Open Sidebar Button */
+    .menu-btn {
+      font-size: 30px;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #343a40;
+      z-index: 3;
+    }
+
+    /* Contact Form Styles */
+    .contact-container {
+      width: 50%;
+      margin: 80px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+      transition: margin-left 0.5s;
+    }
+
+    h2, p {
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    /* Response Message */
+    #responseMessage {
+      margin-top: 15px;
+      color: #28a745;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .contact-container {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="closeNav()">×</span>
+    <a href="home page.html">🏠 <span>Home</span></a>
+    <a href="shop.html">🛍 <span>Shop</span></a>
+    <a href="add to cart.html">🛒 <span>Cart</span></a>
+    <a href="about.html">ℹ️ <span>About</span></a>
+    <a href="contact.html">📞 <span>Contact</span></a>
+  </div>
+
+  <!-- Open Sidebar Button -->
+  <div class="menu-btn" onclick="openNav()">☰</div>
+
+  <!-- Contact Section -->
+  <div id="main" class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you! Fill out the form below:</p>
+
+    <form id="contactForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Your message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div id="responseMessage"></div>
+  </div>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form from refreshing the page
+
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let message = document.getElementById("message").value.trim();
+      let responseMessage = document.getElementById("responseMessage");
+
+      if (name === "" || email === "" || message === "") {
+        responseMessage.style.color = "red";
+        responseMessage.innerText = "Please fill in all fields.";
+        return;
+      }
+
+      // Simulating successful form submission
+      responseMessage.style.color = "green";
+      responseMessage.innerText = "Thank you! Your message has been sent.";
+
+      // Reset the form
+      document.getElementById("contactForm").reset();
+    });
+
+    // Open Sidebar Menu
+    function openNav() {
+      document.getElementById("sidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    // Close Sidebar Menu
+    function closeNav() {
+      document.getElementById("sidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+  </script>
+
+</body>
+</html>

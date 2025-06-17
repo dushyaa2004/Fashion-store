@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Fashion Store</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #f0f0f0;
+    }
+
+    /* Sidebar Navigation */
+    #sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #333;
+      color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #sidebar ul li {
+      padding: 15px;
+      text-align: center;
+    }
+
+    #sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+
+    #sidebar ul li a:hover {
+      background: #ff6f61;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 25px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Header */
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .cart {
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Product Grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: auto;
+      max-width: 1200px;
+    }
+
+    .product {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ff6f61;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #d9534f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">✖</button>
+    <ul>
+      <li><a href="home page.html">🏠 Home</a></li>
+      <li><a href="shop.html">🛍 Shop</a></li>
+      <li><a href="add to cart.html">🛒 Cart</a></li>
+      <li><a href="about.html">ℹ About</a></li>
+      <li><a href="contact.html">📞 Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <button class="menu-btn" onclick="openSidebar()">☰</button>
+    <h1>Fashion Store</h1>
+    <a href="add to cart.html" class="cart">🛒 Cart <span id="cart-count">0</span></a>
+  </header>
+
+  <!-- Product Section -->
+  <section class="products">
+    <div class="product" id="product-1">
+        <a href="product-detail.html? id='1'">
+            <img src="product1.jpg" alt="Elegant Dress">
+        </a>
+      <h3>Elegant Dress</h3>
+      <p>$49.99</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-2">
+        <a href="product-detail2.html? id='2'">
+            <img src="product2.jpg" alt="Casual Outfit">
+        </a>
+      <h3>Casual Outfit</h3>
+      <p>$39.99</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-3">
+        <a href="product-detail3.html? id='3'">
+            <img src="product3.jpg" alt="Stylish Jacket">
+        </a>
+      <h3>Stylish Jacket</h3>
+      <p>$59.99</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-4">
+        <a href="product-detail4.html? id='4'">
+            <img src="product4.jpg" alt="Winter Coat">
+        </a>
+      <h3>Winter Coat</h3>
+      <p>$79.00</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-5">
+        <a href="product-detail5.html? id='5'">
+            <img src="product5.jpg" alt="Summer Dress">
+        </a>
+      <h3>Summer Dress</h3>
+      <p>$99.99</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-6">
+        <a href="product-detail6.html? id='6'">
+            <img src="product6.jpg" alt="Leather Jacket">
+        </a>
+      <h3>Leather Jacket</h3>
+      <p>$110.00</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product-7">
+        <a href="product-detail7.html? id='7'">
+            <img src="product7.png" alt="Indo Western">
+        </a>
+        <h3>Indo Western</h3>
+        <p>$160.00</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+
+      <div class="product" id="product-8">
+        <a href="product-detail8.html? id='8'">
+            <img src="product8.jpg" alt="Frock">
+        </a>
+        <h3>Frock</h3>
+        <p>$125.00</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function updateCartCount() {
+        document.getElementById("cart-count").textContent = cart.length;
+      }
+      updateCartCount();
+
+      document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function () {
+          let productDiv = this.parentElement;
+          let productId = productDiv.id;
+          let productName = productDiv.querySelector("h3").textContent;
+          let productPrice = productDiv.querySelector("p").textContent.replace("$", "");
+          let productImage = productDiv.querySelector("img").src;
+
+          let product = { id: productId, name: productName, price: parseFloat(productPrice), image: productImage };
+
+          cart.push(product);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+        });
+      });
+    });
+
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    // Now you can load product details based on productId
+    console.log("Product ID:", productId);
+
+  </script>
+
+</body>
+</html>
