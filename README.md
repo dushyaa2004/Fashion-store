@@ -75,6 +75,5 @@ This project is designed for **freshers** or **students** who want to:
 
 ---
 
-## 📸 Screenshots
 
 
